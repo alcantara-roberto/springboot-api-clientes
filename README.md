@@ -37,4 +37,4 @@ cd springboot-api-clientes
 A API estará disponível em: `http://localhost:8080/clientes`
 
 ## 💡 Observação
-Este projeto faz parte do meu portfólio e demonstra meu aprendizado em **Java + Spring Boot + POO**.
+Este projeto simples demonstra conhecimentos e técnicas em **Java + Spring Boot + POO**.
