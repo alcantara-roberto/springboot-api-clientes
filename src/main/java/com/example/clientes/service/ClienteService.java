@@ -28,7 +28,20 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
-    public void deletar(Long id) {
-        repository.deleteById(id);
+    public Optional<Cliente> atualizar(Long id, Cliente clienteAtualizado) {
+        return repository.findById(id)
+            .map(clienteExistente -> {
+                clienteExistente.setNome(clienteAtualizado.getNome());
+                clienteExistente.setEmail(clienteAtualizado.getEmail());
+                return repository.save(clienteExistente);
+            });
+    }
+
+    public boolean deletarPorId(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

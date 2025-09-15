@@ -1,4 +1,5 @@
 package com.example.clientes.controller;
+
 import com.example.clientes.model.Cliente;
 import com.example.clientes.service.ClienteService;
 import org.springframework.http.ResponseEntity;
@@ -35,23 +36,16 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
-        return service.buscarPorId(id)
-                .map(c -> {
-                    c.setNome(cliente.getNome());
-                    c.setEmail(cliente.getEmail());
-                    return ResponseEntity.ok(service.salvar(c));
-                })
+        return service.atualizar(id, cliente)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        return service.buscarPorId(id)
-                .map(c -> {
-                    service.deletar(id);
-                    return ResponseEntity.noContent().build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+        if (service.deletarPorId(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
-
