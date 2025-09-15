@@ -1,5 +1,4 @@
 package com.example.clientes.controller;
-
 import com.example.clientes.model.Cliente;
 import com.example.clientes.service.ClienteService;
 import org.springframework.http.ResponseEntity;
@@ -55,3 +54,4 @@ public class ClienteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 }
+
